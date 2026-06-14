@@ -220,11 +220,8 @@ if __name__ == "__main__":
                     search_next_obs_tensor = torch.from_numpy(search_next_obs).unsqueeze(0)
                     search_q_max, search_value_max = get_max_q_V(value_networks, search_next_obs_tensor)
                     current_value = value_networks[q_max](search_next_obs_tensor).item()
-                    if mode == 'hybrid' and search_q_max != q_max and betterness_valuefunction(current_value, search_value_max, mu):#
-                        # print(np.round(search_value_max,2), np.round(current_value,2))# and search_value_max/current_value > mu: # TODO how to implement the check properly
-                        # print('better q available in' + str(dwelltime_steps) + ' steps at x=', np.round(search_env.x,2))
+                    if mode == 'hybrid' and search_q_max != q_max and betterness_valuefunction(current_value, search_value_max, mu):
                         break
-                # print('dwell time steps', dwelltime_steps)
 
                 for _ in range(min(test_env.TIME_STEPS_left, dwelltime_steps+1)):
                     obs, test_reward, test_done, _, _ = test_env.step(q_max)
