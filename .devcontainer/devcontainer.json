@@ -1,0 +1,18 @@
+{
+  "name": "Python Dev Container (CPU)",
+  "dockerFile": "Dockerfile",
+  "extensions": [
+      "ms-python.python"
+  ],
+  "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "forwardPorts": [
+      8000
+  ],
+  "runArgs": [
+      "--gpus",
+      "all"
+  ],
+  "remoteUser": "vscode"
+}
