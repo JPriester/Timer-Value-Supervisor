@@ -15,8 +15,8 @@ def state_to_observation_tensor(x, setpoints=torch.tensor([-1, 1], requires_grad
 
 
 
-# Define the network architecture (must match training)
-state_dim = 2  # Replace with your actual state dimension
+# Define the network architecture
+state_dim = 2 
 hidden_layers = [64]*2
 activation_functions = ['relu']*2
 
