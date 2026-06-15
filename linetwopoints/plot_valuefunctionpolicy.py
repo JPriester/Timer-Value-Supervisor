@@ -60,8 +60,8 @@ def get_max_q_V(value_networks, obs_tensor):
 
 # Main execution
 if __name__ == "__main__":
-    # Define the network architecture (must match training)
-    state_dim = 2  # Replace with your actual state dimension
+    # Define the network architecture 
+    state_dim = 2 
     hidden_layers = [256]*2
     activation_functions = ['tanh', 'tanh']
 
@@ -109,27 +109,18 @@ if __name__ == "__main__":
             plt.plot(x_range[i:i+2], controls[i:i+2], color=color, linewidth=3)  # Plot segment
         else:
             print('z = ', x_range[i:i+2])
-    # plt.figure(idplot+100)
     plt.grid(visible=True)
     plt.xlabel('$z$', fontsize=22)
     plt.ylabel(r'$u$', fontsize=22)
-    # plt.ylim([-3, 3])
     # Add legend for q lines
     legend_handles = [
         Line2D([0], [0], color=linecolors[0], lw=2, label='$q=1$'),
         Line2D([0], [0], color=linecolors[1], lw=2, label='$q=2$'),
     ]
-    plt.legend(handles=legend_handles, fontsize=16)#, title="Legend for $q$")
+    plt.legend(handles=legend_handles, fontsize=16)
     plt.tight_layout()
     plt.savefig('plots/twoline_policy.pdf')
-    # plt.savefig('plots/twoline_timesims_noise'+str(NOISE_MAGNITUDE).replace('.', '')+'_stepsahead'+str(search_horizon)+'.pdf')
-    
-    # plt.title('hybrid logic implemented, noise = ' +str(NOISE_MAGNITUDE)+', $\mu=$'+str(mu)+', search '+str(search_horizon))
-    # plt.figure(idplot)
 
-    # plt.title('hybrid logic implemented, noise = ' +str(NOISE_MAGNITUDE)+', $\mu=$'+str(mu)+', search '+str(search_horizon))
-        
-    # Try with noise
 
 
 
