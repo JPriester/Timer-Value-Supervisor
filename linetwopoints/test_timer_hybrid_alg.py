@@ -78,8 +78,8 @@ def get_max_q_V(value_networks, obs_tensor):
 
 # Main execution
 if __name__ == "__main__":
-    # Define the network architecture (must match training)
-    state_dim = 2  # Replace with your actual state dimension
+    # Define the network architecture 
+    state_dim = 2 
     hidden_layers = [256]*2
     activation_functions = ['tanh', 'tanh']
 
@@ -136,11 +136,8 @@ if __name__ == "__main__":
                     search_next_obs_tensor = torch.from_numpy(search_next_obs).unsqueeze(0)
                     search_q_max, search_value_max = get_max_q_V(value_networks, search_next_obs_tensor)
                     current_value = value_networks[q_max](search_next_obs_tensor).item()
-                    if search_q_max != q_max and betterness_valuefunction(current_value, search_value_max, mu):#
-                        # print(np.round(search_value_max,2), np.round(current_value,2))# and search_value_max/current_value > mu: # TODO how to implement the check properly
-                        # print('better q available in' + str(dwelltime_steps) + ' steps at x=', np.round(search_env.x,2))
+                    if search_q_max != q_max and betterness_valuefunction(current_value, search_value_max, mu):
                         break
-                # print('dwell time steps', dwelltime_steps)
 
                 for _ in range(min(test_env.TIME_STEPS_left, dwelltime_steps+1)):
                     obs, test_reward, test_done, _, _ = test_env.step(q_max)
@@ -165,7 +162,7 @@ if __name__ == "__main__":
             timevec = np.linspace(0, len(xs)*test_env.SAMPLING_TIME_SECONDS, len(xs))
             plt.plot(timevec, xs)
             for i in range(len(xs) - 1):  # Iterate over consecutive points
-                color = linecolors[q_maxes[i]] #if q_maxes[i] == 0 else linecolors[1]  # Choose color based on q_maxes
+                color = linecolors[q_maxes[i]]  # Choose color based on q_maxes
                 ax_time.plot(timevec[i:i+2], xs[i:i+2], color=color, linewidth=2)  # Plot segment with the chosen color
             ax_time.plot(timevec[0], xs[0], 'o', color=linecolors[q_maxes[0]], linewidth=2, markersize=16, fillstyle='none')
             ax_time.plot(timevec[-1], xs[-1], 'x', color=linecolors[q_maxes[-1]], linewidth=2, markersize=10)
@@ -182,7 +179,7 @@ if __name__ == "__main__":
             Line2D([0], [0], color=linecolors[0], lw=2, label='$q=1$'),
             Line2D([0], [0], color=linecolors[1], lw=2, label='$q=2$'),
         ]
-        ax_time.legend(handles=legend_handles, fontsize=16)#, title="Legend for $q$")
+        ax_time.legend(handles=legend_handles, fontsize=16)
         plt.tight_layout()
 
         plt.savefig('plots/twoline_valuesims_noise'+str(NOISE_MAGNITUDE).replace('.', '')+'_stepsahead'+str(search_horizon)+'.pdf')
